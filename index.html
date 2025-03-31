@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEL0002's Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="https://mineskin.eu/helm/KEL0002">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const titles = [
+                "Hi! I am KEL0002",
+                "I'm a (mostly) Minecraft developer",
+                "You may know some of my projects",
+                "Scroll down to read more",
+                "I know that this is bad design, but this title just looks too clean",
+                "I use Linux, btw",
+                "Have you tried scrolling down yet?"
+            ];
+            const titleElement = document.querySelector(".content");
+            let index = 0;
+
+            function typeText(text, callback) {
+                let i = 0;
+                titleElement.textContent = "";
+                const typingInterval = setInterval(() => {
+                    titleElement.textContent += text[i];
+                    i++;
+                    if (i === text.length) {
+                        clearInterval(typingInterval);
+                        setTimeout(() => deleteText(callback), 2000);
+                    }
+                }, 100);
+            }
+
+            function deleteText(callback) {
+                const deletingInterval = setInterval(() => {
+                    titleElement.textContent = titleElement.textContent.slice(0, -1);
+                    if (titleElement.textContent.length === 0) {
+                        clearInterval(deletingInterval);
+                        setTimeout(callback, 500);
+                    }
+                }, 50);
+            }
+
+            function cycleTitles() {
+                index = (index + 1) % titles.length;
+                typeText(titles[index], cycleTitles);
+            }
+
+            typeText(titles[0], cycleTitles);
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const birthDate = new Date(2007, 9, 30, 18, 30, 0);
+
+            function updateAgeCounter() {
+                const now = new Date();
+                const diff = now - birthDate;
+
+                const seconds = Math.floor((diff / 1000) % 60);
+                const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const days = Math.floor((diff / (1000 * 60 * 60 * 24)) % 30.4375);
+                const months = Math.floor((diff / (1000 * 60 * 60 * 24 * 30.4375)) % 12);
+                const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+
+                const format = (num) => num.toString().padStart(2, '0');
+
+                document.getElementById('age-counter').textContent =
+                    `${format(years)}y:${format(months)}m:${format(days)}d:${format(hours)}h:${format(minutes)}min:${format(seconds)}s`;
+            }
+
+            updateAgeCounter();
+            setInterval(updateAgeCounter, 1000);
+        });
+
+        function copyToClipboard(text, event) {
+            event.preventDefault();
+
+            const ripple = document.createElement("div");
+            ripple.classList.add("global-ripple-effect");
+
+            ripple.style.left = `${event.clientX}px`;
+            ripple.style.top = `${event.clientY}px`;
+
+            document.body.appendChild(ripple);
+
+            navigator.clipboard.writeText(text).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+
+            setTimeout(() => {
+                ripple.remove();
+            }, 1500);
+        }
+    </script>
+</head>
+<body>
+<div class="overlay"></div>
+<div class="hero">
+    <div class="content"></div>
+</div>
+<section class="info-section">
+    <div class="box row-header">You may know me from these Projects: </div>
+    <div class="box">
+        <div class="box-title">SMPE</div>
+        <div class="box-content">
+            Nicely coded Paper Plugin adding randomly occurring events to the SMP
+        </div>
+        <div class="box-links">
+            <a href="https://modrinth.com/plugin/smpe" target="_blank"><img src="https://raw.githubusercontent.com/modrinth/code/refs/heads/main/apps/app/icons/icon.png" alt="Modrinth" class="box-link-img"></a>
+            <a href="https://github.com/KEL0002/SMPE" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github" class="box-link-img"></a>
+            <a href="https://bstats.org/plugin/bukkit/SMPE/25137" target="_blank"><img src="https://cdn-icons-png.flaticon.com/128/2567/2567943.png" alt="bStats" class="box-link-img"></a>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-title">BuildAI</div>
+        <div class="box-content">
+            Paper Plugin allowing LLMs to place blocks
+        </div>
+        <div class="box-links">
+            <a href="https://modrinth.com/plugin/buildai" target="_blank"><img src="https://raw.githubusercontent.com/modrinth/code/refs/heads/main/apps/app/icons/icon.png" alt="Modrinth" class="box-link-img"></a>
+            <a href="https://github.com/KEL0002/buildai" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github" class="box-link-img"></a>
+            <a href="https://bstats.org/plugin/bukkit/BuildAI/24540" target="_blank"><img src="https://cdn-icons-png.flaticon.com/128/2567/2567943.png" alt="bStats" class="box-link-img"></a>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-title">TotemBalancer</div>
+        <div class="box-content">
+            Small Paper Plugin rebalancing minecraft totems by making them active for some time on right-click
+        </div>
+        <div class="box-links">
+            <a href="https://modrinth.com/plugin/totembalancer" target="_blank"><img src="https://raw.githubusercontent.com/modrinth/code/refs/heads/main/apps/app/icons/icon.png" alt="Modrinth" class="box-link-img"></a>
+            <a href="https://bstats.org/plugin/bukkit/TotemBalancer/24718" target="_blank"><img src="https://cdn-icons-png.flaticon.com/128/2567/2567943.png" alt="bStats" class="box-link-img"></a>
+        </div>
+    </div>
+
+    <div class="box row-header">About Me:</div>
+    <div class="box">
+        <div class="box-title">General Info</div>
+        <div class="box-content general-info">
+            <p>Country: 🇩🇪 Germany</p>
+            <p>Age: <span id="age-counter">00y:00m:00d:00h:00min:00s</span></p>
+            <p>Job: Student</p>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="box-title">Programming knowledge</div>
+        <div class="box-content">
+            <div class="skill-bars">
+                <div class="skill"><span class="skill-name">Java</span><div class="skill-bar">
+                    <div class="skill-level" style="width: 90%"></div></div>
+                </div>
+                <div class="skill"><span class="skill-name">Python</span><div class="skill-bar">
+                    <div class="skill-level" style="width: 75%"></div></div>
+                </div>
+                <div class="skill"><span class="skill-name">HTML/CSS/JS</span><div class="skill-bar">
+                    <div class="skill-level" style="width: 15%"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box new-row"></div>
+    <div class="box">
+        <div class="box-title">Links</div>
+        <div class="box-content">
+            <div class="featured-links">
+                <a href="https://github.com/KEL0002" target="_blank" class="featured-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" class="featured-link-img">
+                    <div class="featured-link-title">GitHub</div>
+                    <div class="featured-link-subtitle">KEL0002</div>
+                </a>
+                <a href="https://www.youtube.com/@KEL0002" target="_blank" class="featured-link">
+                    <img src="https://www.youtube.com/s/desktop/247b1e86/img/logos/favicon_144x144.png" alt="YouTube" class="featured-link-img">
+                    <div class="featured-link-title">YouTube</div>
+                    <div class="featured-link-subtitle">KEL0002</div>
+                </a>
+                <a href="https://www.twitch.tv/kel00002" target="_blank" class="featured-link">
+                    <img src="https://cdn-icons-png.flaticon.com/128/5968/5968819.png" alt="Twitch" class="featured-link-img">
+                    <div class="featured-link-title">Twitch</div>
+                    <div class="featured-link-subtitle">KEL00002</div>
+                </a>
+                <a href="#" onclick="copyToClipboard('contact@kel0002.de', event)" class="featured-link">
+                    <img src="https://cdn-icons-png.flaticon.com/128/725/725643.png" alt="E-Mail" class="featured-link-img">
+                    <div class="featured-link-title">E-Mail</div>
+                    <div class="featured-link-subtitle">contact@kel0002.de</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
